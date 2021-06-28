@@ -1,17 +1,20 @@
 var currentDate = moment().format("dddd, MMMM Do")
 $("#currentDay").append("Today's Date Is: ", currentDate)
 
-$("button").on("click", function() {
-    var timeId = $(this).attr("time");
-    var taskEl = $(this).prev().val();
+var hours = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
+var hoursMilitary = [9, 10, 11, 12, 13, 14, 15, 16, 17,];
 
-    localStorage.setItem(timeId, taskEl);
+
+$(".saveBtn").click(function() {
+   var hourId = $(this).parent().siblings(".hour").text();
+   var savedData = $(this).parent().siblings(".col-sm-10").children(".form-control").val();
+   localStorage.setItem(hourId, savedData);
+   console.log($(this))
 });
 
 for (var i = 9; i < 18; i++) {
 
-    var currentTime = new Date().getHours(); 
-    console.log(currentTime);
+    var currentTime = newDate().getHours();
 
     var hour = i;
 
@@ -24,11 +27,11 @@ for (var i = 9; i < 18; i++) {
      hour -= 12;
     };
 
-    var targetId = "#" + hour + timeOfDay;
-    var timeInput = localStorage.getItem(hour + timeOfDay);
+    var targetId = hour + timeOfDay;
+    var storedData = localStorage.getItem();
 
-    if (timeInput) {
-        $(targetId).val(timeInput);
+    if (storedData) {
+        $(targetId).val(storedData);
     }
 
     if (i < currentTime) {
@@ -41,18 +44,3 @@ for (var i = 9; i < 18; i++) {
         $(targetId).addClass("present")
     }
 };
-
-var container = $(".container")
-      
-    var hours = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
-    var hoursMilitary = [9, 10, 11, 12, 13, 14, 15, 16, 17,];
-
-    for (let index = 0; index < hours.length; index++) {
-    // compare moment.hour() with hoursMilitary while using if/else and else/if statements
-        container.append(`<div class="row">
-      <div class="col-sm-1 hour">${hours[index]}</div>
-      <div class="col-sm-10"><textarea class="form-control h-100 w-100"></textarea></div>
-      <div class="col-sm-1"><button class="saveBtn h-100 w-100"><i class="far fa-save"></i></button></div>
-    </div>`);       
-};
-
