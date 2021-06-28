@@ -9,12 +9,12 @@ $(".saveBtn").click(function() {
    var hourId = $(this).parent().siblings(".hour").text();
    var savedData = $(this).parent().siblings(".col-sm-10").children(".form-control").val();
    localStorage.setItem(hourId, savedData);
-   console.log($(this))
+   console.log($(this));
 });
 
 for (var i = 9; i < 18; i++) {
 
-    var currentTime = newDate().getHours();
+    var currentTime = new Date().getHours();
 
     var hour = i;
 
@@ -28,7 +28,9 @@ for (var i = 9; i < 18; i++) {
     };
 
     var targetId = hour + timeOfDay;
-    var storedData = localStorage.getItem();
+    var hourId = $(this).parent().siblings(".hour").text();
+    var savedData = $(this).parent().siblings(".col-sm-10").children(".form-control").val();
+    var storedData = localStorage.getItem(hourId, savedData);
 
     if (storedData) {
         $(targetId).val(storedData);
